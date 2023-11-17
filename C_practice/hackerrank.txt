@@ -1,0 +1,272 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+int main() 
+{
+    int a, b;
+    scanf("%d\n%d", &a, &b);
+  	// Complete the code.
+    for(;a<=b;a++){
+        if(a>=1&&a<=9){
+            if (a==1) {
+                printf("one\n");
+            }
+                        if (a==2) {
+                printf("two\n");
+            }
+                        if (a==3) {
+                printf("three\n");
+            }
+                        if (a==4) {
+                printf("four\n");
+            }
+                        if (a==5) {
+                printf("five\n");
+            }
+                        if (a==6) {
+                printf("six\n");
+            }
+                        if (a==7) {
+                printf("seven\n");
+            }
+                        if (a==8) {
+                printf("eight\n");
+            }
+                        if (a==9) {
+                printf("nine\n");
+            }
+        }
+        else {
+            if(a%2==0){
+                printf("even\n");
+            }
+            else {
+                printf("odd\n");
+            }
+        }
+    }
+    return 0;
+}
+
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+	
+    int n;
+    scanf("%d", &n);
+    //Complete the code to calculate the sum of the five digits on n.
+    int op_num,sum=0,i;
+    op_num=n;
+    for(i=0;i<5;i++){//5 is the number of digits which could also be found by
+    //pow(10,i) dividing
+        sum = sum+op_num%10;
+        op_num=op_num/10;
+    }
+    printf("%d",sum);
+    return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+ * This stores the total number of books in each shelf.
+ */
+int* total_number_of_books;
+
+/*
+ * This stores the total number of pages in each book of each shelf.
+ * The rows represent the shelves and the columns represent the books.
+ */
+int** total_number_of_pages;
+
+int main()
+{
+    int total_number_of_shelves;
+    scanf("%d", &total_number_of_shelves);
+    
+    int total_number_of_queries;
+    scanf("%d", &total_number_of_queries);
+    
+
+    int n=total_number_of_queries;
+            
+    while (total_number_of_queries--) {
+        int type_of_query;
+        scanf("%d", &type_of_query);
+        
+        if (type_of_query == 1) {
+            /*
+             * Process the query of first type here.
+             */
+            int x, y;
+            scanf("%d %d", &x, &y);
+            int i,j,books_n=0;
+
+        if(total_number_of_queries==n-1){    
+            total_number_of_books = malloc( total_number_of_shelves * sizeof( int ) );
+
+            for (int i=0; i<total_number_of_shelves; i++) {
+            total_number_of_books[i]=0;
+            }
+            total_number_of_pages = (int **) malloc                 (total_number_of_shelves*sizeof(int *)); 
+            for(i=0;i<total_number_of_shelves;i++)
+             {
+                 total_number_of_pages[i] = (int *) malloc(1100*sizeof(int)); 
+             }//1100 here instead of books_n
+            
+            for (i=0; i<total_number_of_shelves; i++) {
+                for (j=0; j<1100; j++) {
+                    total_number_of_pages[i][j]=0;
+                }
+            }
+        }
+        // this was an issue because of the fact that it was traversing
+        // the loop multiple times for each thing.
+            total_number_of_books[x]+=1;// no need of another for loop
+            // better optimized
+            
+            for (j=0; j<1100; j++) {//1100 here instead of books_n
+                if (total_number_of_pages[x][j]==0) {
+                       total_number_of_pages[x][j]=y; 
+                       break;
+                }
+                    
+            
+        }
+        } else if (type_of_query == 2) {
+            int x, y;
+            scanf("%d %d", &x, &y);
+            printf("%d\n", *(*(total_number_of_pages + x) + y));
+        } else {
+            int x;
+            scanf("%d", &x);
+            printf("%d\n", *(total_number_of_books + x));
+        }
+    }
+
+    if (total_number_of_books) {
+        free(total_number_of_books);
+    }
+    
+    for (int i = 0; i < total_number_of_shelves; i++) {
+        if (*(total_number_of_pages + i)) {
+            free(*(total_number_of_pages + i));
+        }
+    }
+    
+    if (total_number_of_pages) {
+        free(total_number_of_pages);
+    }
+    
+    return 0;
+}
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+//Complete the following function.
+
+int marks_summation(int* marks, int number_of_students, char gender) {
+  //Write your code here.
+    int sum=0,i;
+    if (gender=='g') {
+        for(i=1;i<number_of_students;i+=2){
+            sum= sum + marks[i];
+        }
+    }
+    else {
+        for(i=0;i<number_of_students;i+=2){
+            sum= sum + marks[i];
+        }
+    }
+  return sum;
+}
+
+int main() {
+    int number_of_students;
+    char gender;
+    int sum;
+  
+    scanf("%d", &number_of_students);
+    int *marks = (int *) malloc(number_of_students * sizeof (int));
+ 
+    for (int student = 0; student < number_of_students; student++) {
+        scanf("%d", (marks + student));
+    }
+    
+    scanf(" %c", &gender);
+    sum = marks_summation(marks, number_of_students, gender);
+    printf("%d", sum);
+    free(marks);
+ 
+    return 0;
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_HEIGHT 41
+
+struct box
+{
+	/**
+	* Define three fields of type int: length, width and height
+	*/
+    int length;
+    int width;
+    int height;
+};
+
+typedef struct box box;
+
+int get_volume(box b) {
+	/**
+	* Return the volume of the box
+	*/
+    
+    int volume;
+    volume=b.height*b.length*b.width;
+    return volume;
+}
+
+int is_lower_than_max_height(box b) {
+	/**
+	* Return 1 if the box's height is lower than MAX_HEIGHT and 0 otherwise
+	*/
+    
+    if (b.height<41) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	box *boxes = malloc(n * sizeof(box));
+	for (int i = 0; i < n; i++) {
+		scanf("%d%d%d", &boxes[i].length, &boxes[i].width, &boxes[i].height);
+	}
+	for (int i = 0; i < n; i++) {
+		if (is_lower_than_max_height(boxes[i])) {
+			printf("%d\n", get_volume(boxes[i]));
+		}
+	}
+	return 0;
+}
+
+
+
