@@ -221,6 +221,13 @@ void sorting_kth(){
 
 }
 
+int stairs(int n){
+    if(n==1) return 1;
+    else return (stairs(n-2)+stairs(n-1));
+}
+
+
+
 int main(){
     // odd_even();
     // sum_avg();
