@@ -237,7 +237,7 @@ int main(){
     // delete_element();
     // delete_element_value_distinct();
     // delete_element_value_repeated();
-    // new_array();
+    new_array();
     // sorting_kth();
     return 0;
 }
