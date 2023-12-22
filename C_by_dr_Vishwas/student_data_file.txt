@@ -1,2 +1,3 @@
-Devansh	18	9.250000	
-Sanskar	19	9.250000	
+Devansh	18	9.200000	
+Rishab	18	8.500000	
+Type

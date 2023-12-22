@@ -26,6 +26,7 @@ int main(){
 
         fprintf(file_pointer,"\n");
     }
+    fprintf(file_pointer,"Type");
     fclose(file_pointer);
     return 0;
 }
