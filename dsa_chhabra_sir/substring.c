@@ -4,8 +4,8 @@
 void substring(char str[],char to_check[]){
     bool flag=false;
     bool flag2= false;
-    int len_str= strlen(str);
-    int len_to_check= strlen(to_check);
+    // int len_str= strlen(str);
+    // int len_to_check= strlen(to_check);
     for(int i=0;str[i]!='\0';i++){
         flag = false;
         if(str[i]==to_check[0]){
