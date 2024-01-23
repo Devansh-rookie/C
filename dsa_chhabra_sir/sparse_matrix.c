@@ -96,6 +96,7 @@ int main(){
     printf("What are the numbers of Rows and Columns: ");
     scanf("%d %d",&arr[0].row,&arr[0].col);
     printf("Enter non-zero values:\n");
+    arr[0].value=n;
     for(int i=1;i<n+1;i++){
         printf("Row Column Value\n");
         scanf("%d %d %d",&arr[i].row,&arr[i].col,&arr[i].value);
