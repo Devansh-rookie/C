@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include<time.h>
 void merge(int a[], int l, int mid, int h){
     int i,j,k;
     int b[100];
@@ -39,10 +39,19 @@ void merge_sort(int a[], int l, int h){
 }
 
 int main(){
-    int arr[]= {3,1,2,4,5,8,9};
-    merge_sort(arr,0,6);
-    for(int i=0;i<7;i++){
-        printf("%d ",arr[i]);
-    }
+    int n;
+    // time_t start = time(NULL); This would include the time taken for the user to enter the values
+    printf("What is the length of the array: ");
+    scanf("%d",&n);
+    int arr[n];
+    for(int i=0;i<n;i++) scanf("%d",&arr[i]);
+    time_t start = time(NULL);
+    merge_sort(arr,0,n-1);
+        for(int i=0;i<n;i++){
+            printf("%d ",arr[i]);
+        }
+    printf("\n");
+    time_t end = time(NULL);
+    printf("Time taken to run the program: %lf seconds.", difftime(end,start));
     return 0;
 }
