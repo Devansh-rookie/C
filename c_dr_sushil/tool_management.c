@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdbool.h>
-
+#include<stdlib.h>
 typedef struct hardware
 {
     int record;
@@ -13,24 +13,16 @@ hardware arr[100];
 int n=0;
 
 void input(){
-    char ch;
-    while(true){
-        printf("Input your choice, 'q' to exit and any other to continue");
-        scanf("%c",&ch);
-        if(ch!='q'){
             printf("Record No: ");
             scanf("%d",&arr[n].record);
             printf("Tool Name: ");
-            scanf("%[^\n]s",arr[n].tool_name);
+            scanf(" %[^\n]s",arr[n].tool_name);
             printf("Quantity: ");
             scanf("%d",&arr[n].qty);
             printf("Cost: ");
             scanf("%f",&arr[n].price);
             n++;
-        }
-        else break;
     }
-}
 
 void delete(){
     printf("What record number to delete: ");
@@ -57,13 +49,14 @@ void dump_in_file(){
     FILE *fp;
     fp = fopen("hardware.txt","w");
     for(int i=0;i<n;i++){
-        fprintf(fp, "%d,",arr[i].record);
-        fprintf(fp, "%s,",arr[i].tool_name);
-        fprintf(fp, "%d,",arr[i].qty);
-        fprintf(fp, "%f,",arr[i].price);
+        fprintf(fp, "%d\t\t\t",arr[i].record);
+        fprintf(fp, "%s\t\t\t",arr[i].tool_name);
+        fprintf(fp, "%d\t\t\t",arr[i].qty);
+        fprintf(fp, "%f\t\t\t",arr[i].price);
         fprintf(fp,"\n");
     }
-    printf("Successfully dump in file.");
+    printf("Successfully dumped in file.\n");
+    fclose(fp);
 }
 
 void update(){
@@ -82,7 +75,7 @@ void update(){
         return;
     }
     printf("What to update:\n");
-    printf("1. Record\n2. Tool Name\n3. Quantity\n4. Price");
+    printf("1. Record\n2. Tool Name\n3. Quantity\n4. Price\n");
     int k;
     scanf("%d",&k);
     switch (k)
@@ -93,7 +86,7 @@ void update(){
         break;
     case 2:
         printf("What to add: ");
-        scanf("%[^\n]s",arr[i].tool_name);
+        scanf(" %[^\n]s",arr[i].tool_name);
         break;
     case 3:
         printf("What to add: ");
@@ -113,8 +106,9 @@ void update(){
 int main(){
     
     int a;
-    printf("Give your choice as a number:");
+    printf("Give your choice as a number:\n");
     b:
+    printf("1. Input\n2. Delete\n3. Dump in File\n4. Update\n5. Exit.\n");
     scanf("%d",&a);
     switch (a)
     {
