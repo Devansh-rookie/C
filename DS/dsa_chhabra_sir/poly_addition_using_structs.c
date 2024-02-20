@@ -31,7 +31,7 @@ void poly_add(poly p1[],poly p2[],int n1,int n2){
         }
     }
     j=0;
-    while(i<n2){
+    while(j<n2){
         if(p1[i].exp<p2[j].exp){
             p3[k]=p2[j];
             j++;k++;
