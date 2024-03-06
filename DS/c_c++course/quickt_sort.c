@@ -18,7 +18,7 @@ int partition(int arr[], int low, int high){
         }
         // else do nothing absolutely noything bada ho toh chod do
     }
-    swap(&arr[i+1],&arr[high]);
+    swap(&arr[i+1],&arr[high]);// pivot ko position main lana
     return (i+1);
 }
 

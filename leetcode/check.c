@@ -56,3 +56,8 @@ bool isValid(char* s) {
     }
     return false;
 }
+
+int main(){
+    printf("%d", isValid("[{()}]"));
+    return 0;
+}
