@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 typedef struct Node
 {
     int data;
@@ -160,6 +161,20 @@ void insert_last(int val){
 
 void insertInSortedLL(Node *p, int val){
     // for ascending order
+    if(p==NULL){
+        Node *t = (Node*)malloc(sizeof(Node));
+        first = t;
+        t->data=val;
+        t->next=p;
+        return;
+    }
+    if(p->data>val){
+        Node *t = (Node*)malloc(sizeof(Node));
+        t->data=val;
+        first = t;
+        t->next=p;
+        return;
+    }
     while(p!=NULL){
         // p->data>= val won't work as it would insert at one after the value
         // if((p->next)->data >= val && p->next!=NULL){
@@ -182,6 +197,116 @@ void insertInSortedLL(Node *p, int val){
     }
 }
 
+int deleteNode(Node *p, int index){
+    int c=0;
+    if(p==NULL) return 0; 
+    else if(c==index){
+        int x;
+        x = first->data;
+        first = p->next;
+        return x;
+    }
+    else{
+        while (p!=NULL)
+        {
+            if(c+1 == index){
+                int x;
+                x = (p->next)->data;
+                p->next=(p->next)->next;
+                return x;
+            }
+            c++;
+            p=p->next;
+        }
+    }
+    return 0;
+}
+
+bool isSorted(Node *p){
+    // This is for ascending sort
+    if(p==NULL) return true;
+    else if(p->next==NULL) return true;// single element is always sorted
+    while(p->next!=NULL){
+        if(p->data>(p->next)->data) return false;
+        p=p->next;
+    }
+    return true;
+}
+
+void removeDuplicates(Node * p){
+    // struct ListNode* first= p;
+    // this is done because first is needed as p would be at the end while traversing so we would have to return the head of the list again
+
+    while(p->next!=NULL){
+        if(p->data==(p->next)->data){
+            p->next = (p->next)->next;
+            continue;
+            // continue means we will not traverse the list here as we have found a duplicate and we will not traverse as long as we don't delete all the duplicate elements in the sorted linked list
+        }
+        p=p->next;
+    }
+}
+
+void removeOGandDuplicates(Node * p){
+    // struct ListNode* first= p;
+    // this is done because first is needed as p would be at the end while traversing so we would have to return the head of the list again
+    bool flag = false;
+    Node * previous=p;
+    while(p->next!=NULL){
+        if(p->data==(p->next)->data){
+            p->next = (p->next)->next;
+            flag = true;
+            continue;
+            // continue means we will not traverse the list here as we have found a duplicate and we will not traverse as long as we don't delete all the duplicate elements in the sorted linked list
+        }
+        if(flag){
+            previous->next= p->next;
+        }
+        flag = false;
+        previous = p;
+        p=p->next;
+    }
+}
+
+void reverse_LL_using_arr(Node *p){
+    while(p!=NULL){
+
+    }
+}
+
+void reverseUsingSlidingPointers(Node * p){
+    Node * q;Node * r;// here q would be ahead and then q should point to r
+    q = NULL;
+    r = NULL;
+    while(p!=NULL){// as we want to link the last q when p is NULL to r so the last element is linked as well.
+        // q->next= r;
+        // the code block below represents the traversing of the Linked List using sliding pointers
+        r = q;
+        q = p;
+        p=p->next;
+        // for reversing this LL the next line is used
+        q->next= r;
+    }
+    first = q;
+}
+
+void recursiveReverseLL_printonly(Node * p){
+    if(p!=NULL){
+        recursiveReverseLL_printonly(p->next);
+        printf("%d ", p->data);
+
+    }
+}
+
+// do it again it didn't work with 3 variables, but it didn't have to as when popping from the recursive stack this works well enough
+void recursiveFullReverse(Node * p, Node * q){
+    if(p!=NULL){
+        recursiveFullReverse(p->next, p);
+        // now here after all the recursive calls we would be at the last where p is NULL as p->next has been called prolly
+        p->next= q;
+    }
+    else first = q;
+}
 
 int main(){
     // int a[5]= {2,1,4,5,3};
@@ -209,6 +334,32 @@ int main(){
     printf("\n");
     insertInSortedLL(first, 100);
     insertInSortedLL(first, 120);
-    display(first); 
+    insertInSortedLL(first, 1);
+    insertInSortedLL(first, -1);
+    display(first);
+    printf("\n");
+    printf("%d\n",deleteNode(first, 2));
+    printf("%d\n",deleteNode(first, 7));
+    printf("%d\n",deleteNode(first, 0));
+    // insert_at_index(first,10,6);
+    display(first);
+    printf("\n%d\n",isSorted(first));
+    insertInSortedLL(first, 6);
+    insertInSortedLL(first, 6);
+    insertInSortedLL(first, 6);
+    insertInSortedLL(first, 100);
+    insertInSortedLL(first, 1);
+    display(first);
+    removeDuplicates(first);
+    printf("\n");
+    display(first);
+    reverseUsingSlidingPointers(first);
+    printf("\n");
+    display(first);
+    printf("\n");
+    recursiveReverseLL_printonly(first);
+    printf("\n");
+    recursiveFullReverse(first, NULL);
+    display(first);
     return 0;
 }
