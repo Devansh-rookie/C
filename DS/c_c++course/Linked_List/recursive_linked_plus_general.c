@@ -9,6 +9,7 @@ typedef struct Node
 
 Node *first = NULL;
 Node *last = NULL;
+Node* head = NULL;// for circular Linked List
 
 void create(int a[], int n){
     int i;
@@ -306,6 +307,170 @@ void recursiveFullReverse(Node * p, Node * q){
         p->next= q;
     }
     else first = q;
+}
+
+void concatenate_twoLL(Node * p, Node *q){
+    // p is first and q is second
+    while(p!=NULL){
+        p=p->next;
+    }
+    p->next = q;
+    q=NULL;
+}
+
+void merging_two_LL(Node * first_p , Node *second_p){
+    Node * third; Node* last;
+    // third is the pointer which is pointing to the start of the final Linked List and last is the pointer which is pointing to the last of the final Linked List
+    if(first_p->data>second_p->data){
+        third = second_p; // this represents the first element of the final Linked List
+        last = second_p; // this represents the last element of the final linked list only one element is here so third and last point on the same value till now
+        second_p= second_p->next;
+        // which ever is smaller traverse ahead in the Linked List as we did while merging 2 Arrays
+        // finally make the last element's next as NULL to assume that if it has ended we just end the linked list
+        last->next = NULL;
+    }
+    else{
+        third = first_p;
+        last = first_p;
+        first_p= first_p->next;
+        last->next= NULL;
+    }
+
+    while (first_p!=NULL && second_p!=NULL)
+    {
+        // here third won't be changed as its already made and it represents the first pointer
+        if(first_p->data>second_p->data){
+            last->next = second_p;
+            last= second_p;// the smaller one is to be taken here
+            last->next = NULL;// this is just in case its the last
+            second_p= second_p->next;
+        }
+        else{
+            last->next = first_p;
+            last = first_p;
+            last->next = NULL;
+            first_p = first_p->next;
+        }
+    }
+    if(first_p!=NULL){
+        last->next=first_p;
+    }
+    else if(second_p!=NULL) last->next= second_p;
+    
+}
+
+bool hasLoop(Node * head){
+    // if the Linked List has a loop then true else false
+    Node * slow; Node * fast;
+    slow = head;
+    fast = head;
+    while(slow!=NULL && fast !=NULL){
+        if(slow == fast){
+            return true;
+        }
+        slow= slow->next;// 1 step at a time
+        fast = fast->next->next;// 2 steps at a time
+    }
+    return false;
+}
+
+void displayCircularLL(Node * p){
+    do{
+        printf("%d ", p->data);
+        p=p->next;
+    }while(p!=head);// if we use while with that same condition then the first element won't be printed as p== head there
+}
+
+void displayCircularLLRecursive(Node *p){
+    static int flag = 0;// as we don't have to initialize it every time the function is called so static will ensure that, or we could have used global variables
+    if(p!=NULL|| flag ==0){
+        flag =1;
+        printf("%d ", p->data);
+        displayCircularLLRecursive(p->next);// if we print later and call first then it would print the LL in reverse
+    }
+    flag = 0;
+}
+
+void createCircularLL(int arr[], int n){
+    int i;
+    struct Node *t,*last;
+    head=(struct Node*)malloc(sizeof(struct Node));
+    head->data=arr[0];
+    head->next=head; last=head;
+    for (i=1;i<n;i++){
+        t=(struct Node*)malloc(sizeof(struct Node));
+        t->data=arr[i];
+        t->next=last->next; last->next=t;
+        last=t;
+    }
+}
+
+int lengthCircularLL(Node * p){
+    int c=0;
+    do
+    {
+        c++;
+    } while (p!=head);
+    return c;
+}
+
+void insertCircularLL(Node * Head, int index, int value){
+    int c=0;
+    Node* p=Head;
+    if(index<0 || index>lengthCircularLL(Head)) return; // exit the function without inserting anything.
+    if(index == 0){
+        if(head == NULL){
+            Node*t =(Node*)malloc(sizeof(struct Node));
+            t->data= value;
+            head->next =head;// circular here.
+            return;// exit the function
+        }
+        while(p->next!=head) p=p->next;
+        Node*t =(Node*)malloc(sizeof(struct Node));
+        t->data= value;
+        t->next=p->next;// here p->next is head so that can also be used instead of p->next
+        p->next = t;// head can also point to 't' if needed its also the same if to add it in the end, after the last Node.
+        return;// exit the function
+    }
+    do{
+        if(c==index){
+            Node*t =(Node*)malloc(sizeof(struct Node));
+            t->data= value;
+            t->next=p->next;
+            p->next = t;
+            return;// exit the function
+        }
+        c++;
+        p=p->next;
+    }while(p!=head);
+    return;
+}
+
+int deleteCircularIndex(Node * Head, int index){// -1 means not done, 1 means done
+    int c=0;// 0th index would mean the first element in this representation that we'll follow
+    Node*p = Head;
+    Node*t =(Node*)malloc(sizeof(struct Node));
+    if(index<0 || index>lengthCircularLL(Head)) return -1;
+    if(c+1==index){// if index is 1, that means the first element, that is the head so head is also changed
+        if(head == NULL){
+            return -1;
+        }
+        while(p->next!=head) p=p->next;
+        p->next=head->next;// head is unlinked
+        head= p->next;// make a new head
+        return 1;
+    }
+    do
+    {
+        c++;
+        if(c==index){
+            t->next = p->next;// so p will be unlinked
+            return 1;
+        }
+        t=p;
+        p=p->next;
+    } while (p!=head);
+    return 1;
 }
 
 int main(){
