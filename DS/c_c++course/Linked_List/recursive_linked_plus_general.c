@@ -528,3 +528,31 @@ int main(){
     display(first);
     return 0;
 }
+
+
+//
+/*
+Bakchoding in LeetCode 21.
+
+while (first_p != NULL && second_p != NULL) {
+    if (first_p->val > second_p->val) {
+        last->next = second_p;
+        last = last->next; // Update last
+        second_p = second_p->next;
+    } else {
+        last->next = first_p;
+        last = last->next; // Update last
+        first_p = first_p->next;
+    }
+}
+
+// Append remaining nodes (if any)
+if (first_p != NULL) {
+    last->next = first_p;
+} else {
+    last->next = second_p;
+}
+
+return third;
+
+*/
