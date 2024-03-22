@@ -45,7 +45,7 @@ void infix_postfix(char s[]){
             {
                 ans[j++]=stk[top--];
             }
-            top--;
+            top--; // remove '('
         }
         i++;
     }

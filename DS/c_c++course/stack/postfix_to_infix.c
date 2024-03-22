@@ -24,7 +24,7 @@ void post_in(char s[]){
             char operand1 = stak[j--];
             char operand2 = stak[j--];
             sprintf(final, "(%c%c%c)", operand1, s[i], operand2);
-            stak[j++]= final[0];
+            stak[j++]= final[0];// means the entire current string should be in the stack. so stack should be a char array
         }
         i++;
     }
