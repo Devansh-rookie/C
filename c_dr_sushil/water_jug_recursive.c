@@ -3,10 +3,25 @@
 int c=0;
 int smallCap, medCap, largeCap, measure;
 void waterJug(int A, int B, int C){ // A = small, B= Medium, C = large
-    if(C== measure){// || A== measure || B== measure
+    if(A== measure){// || A== measure || B== measure
     // if we only wan to measure with C if all then use the OR which is commented out.
         printf("Done\n");
         c++;
+        printf("\nRequired Amount is in A.\n");
+        return;
+    }
+    else if(B== measure){// || A== measure || B== measure
+    // if we only wan to measure with C if all then use the OR which is commented out.
+        printf("Done\n");
+        c++;
+        printf("\nRequired Amount is in B.\n");
+        return;
+    }
+    else if(C== measure){// || A== measure || B== measure
+    // if we only wan to measure with C if all then use the OR which is commented out.
+        printf("Done\n");
+        c++;
+        printf("\nRequired Amount is in C.\n");
         return;
     }
     if(A == 0 && B ==0){
