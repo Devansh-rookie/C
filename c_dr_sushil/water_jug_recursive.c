@@ -93,6 +93,7 @@ int main(){
     medCap=2*n+3;
     largeCap = 4*n+4;
     printf("Small(A): %d\nMedium(B): %d\nLarge(C): %d\n", smallCap, medCap, largeCap);
+    // make a new case where measure is a multiple of small jug e.g. for n=2 measure 8 and 10 maybe?? 
     waterJug(0, 0, 4*n+4);
     printf("No. of steps required: %d\n", c-1);
     return 0;
