@@ -8,6 +8,10 @@
 
 #define maxSize 100
 
+//for adding duplicate nodes in the BST for each node
+
+
+
 typedef struct node
 {
     int val;
@@ -18,6 +22,9 @@ typedef struct node
 node * q[maxSize];
 int front = -1;
 int rear = -1;
+
+node * arr[100];
+int i=0;
 
 int max(int a, int b){
     if(a>b) return a;
@@ -203,7 +210,38 @@ node * deleteNode(node * root, int key){
     return root; // return the new root;
 }
 
+
+void addNodesToArr(node * root){
+    if(root == NULL){
+        return;
+    }
+    // According to Preorder
+    arr[i++] = root;
+    addNodesToArr(root->left);
+    addNodesToArr(root->right);
+}
+
+
+
+void makeNew(node * root){
+    if(root==NULL) return;
+    node *t = (node*)malloc(sizeof(node));
+    t->right = NULL;
+    t->val = root->val;
+    t->left = root->left;
+    root->left = t;
+}
+
+
+void addDuplicates(node * root){
+    for(int j=0;j<=i;j++){
+        makeNew(arr[j]);
+    }
+}
+
+
 int main(){
+    // 50 30 70 20 40 60 80 -1
     node * root= NULL;
     int ch;
     while(true){
@@ -253,6 +291,21 @@ int main(){
     printf("\n");
     levelOrderTraversalGood(root);
     printf("\n");
-    
+
+    printf("\n");
+    preOrderDLR(root);
+    printf("\n");
+
+    addNodesToArr(root);
+    addDuplicates(root);
+
+    printf("\n");
+    preOrderDLR(root);
+    printf("\n");
+
+    printf("\n");
+    levelOrderTraversalGood(root);
+    printf("\n");
+
     return 0;
 }

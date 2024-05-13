@@ -180,6 +180,19 @@ void mirrorBT(node * root){
     root->right = temp;
 }
 
+int printAncestor(node * root, int val){
+    if(root != NULL){
+        if(root->val == val){
+            return 1;
+        }
+        if(printAncestor(root->left,val) || printAncestor(root->right,val)){
+            printf("%d ", root->val);
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(){
     // 8 3 5 4 9 7 2 -1 -1 -1 -1 -1 -1 -1 -1
     node * root = createBT();
@@ -205,6 +218,10 @@ int main(){
     printf("\n");
 
     printf("\n");
+    printAncestor(root,4);
+    printf("\n");
+
+    printf("\n");
     printf("Height of the tree is: %d",height(root));
     printf("\n");
 
@@ -224,6 +241,10 @@ int main(){
 
     printf("\n");
     levelOrderTraversalGood(root);
+    printf("\n");
+
+    printf("\n");
+    printAncestor(root,4);
     printf("\n");
 
     return 0;
