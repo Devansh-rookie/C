@@ -6,6 +6,7 @@
 
 #include<stdbool.h>
 
+#include<limits.h>
 #define maxSize 100
 
 typedef struct node
@@ -193,6 +194,17 @@ int printAncestor(node * root, int val){
     return 0;
 }
 
+int maxSum=INT_MIN;
+
+int maxSumTree(node* root){
+    if(root== NULL) return 0;
+    int left =maxSumTree(root->left);
+    int right =maxSumTree(root->right);
+    maxSum = max(maxSum, left+right + root->val);
+    return left + right + root->val;
+}
+
+
 int main(){
     // 8 3 5 4 9 7 2 -1 -1 -1 -1 -1 -1 -1 -1
     node * root = createBT();
@@ -245,6 +257,10 @@ int main(){
 
     printf("\n");
     printAncestor(root,4);
+    printf("\n");
+
+    printf("\n");
+    printf("Max Sum = %d",maxSumTree(root));
     printf("\n");
 
     return 0;
