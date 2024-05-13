@@ -70,7 +70,7 @@ void heapSort(int *heap, int size){// Ascending Order
 }
 
 void heapifyArr(int *arr, int size){
-    for(int i=size/2+1; i>=1;i--){
+    for(int i=size/2; i>=1;i--){
         maxHeapify(arr, i, size);
     }
 }
