@@ -210,6 +210,15 @@ node * deleteNode(node * root, int key){
     return root; // return the new root;
 }
 
+node * succ(node* root){
+    if(!root) return NULL;
+    root = root->right;
+    while(!root->left){
+        root = root->left;
+    }
+    return root;
+}
+
 
 void addNodesToArr(node * root){
     if(root == NULL){
@@ -305,6 +314,10 @@ int main(){
 
     printf("\n");
     levelOrderTraversalGood(root);
+    printf("\n");
+
+    printf("\n");
+    printf("%d", succ(root)->val);
     printf("\n");
 
     return 0;

@@ -74,6 +74,17 @@ void deleteFromHeap(int * heap, int val,int *size){
     max_heapify(heap, index, *size);
 }
 
+int search(int * heap, int val,int *size){
+    if(*size==0){
+        printf("\nEmpty heap\n");
+        return -1;
+    }
+    for(int i=1;i <= *size;i++){
+        if(heap[i] == val) return val;
+    }
+    return -1;
+}
+
 int main(){
     int heap[100];
     int size = 0;
@@ -96,5 +107,8 @@ int main(){
     print(heap,size);
     deleteFromHeap(heap, 55, &size);
     print(heap,size);
+    printf("%d", heap[1]);// maxvalue
+    printf("\n%d\n", search(heap, 55, &size));
+    printf("\n%d\n", search(heap, 54, &size));
     return 0;
 }

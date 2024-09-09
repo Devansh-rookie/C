@@ -343,7 +343,7 @@ int main(){
     // two_inverted_pyramids();//have to do this question again Q25 in the PW Video
     // number_zoom();
     // pyramid_arith();
-    prime_theorem();
+    // prime_theorem();
     return 0;
 }
 
