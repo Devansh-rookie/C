@@ -52,6 +52,7 @@ int main(){
     printf("What are the values of the array: ");
     for(int i=0;i<n;i++) scanf("%d",&arr[i]);
     bubble_sort(arr,n);
+    printf("\n\n");
     selection_sort(arr,n);
     return 0;
 }
