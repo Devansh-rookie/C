@@ -85,6 +85,16 @@ int search(int * heap, int val,int *size){
     return -1;
 }
 
+int maxValue(int *heap, int *size){
+    int val = 0;
+    if(*size < 1) return -1;
+    else val = heap[1];
+    swap(&heap[1], &heap[*size]);
+    *size = *size - 1;
+    max_heapify(heap, 1, *size);
+    return val;
+}
+
 int main(){
     int heap[100];
     int size = 0;
@@ -107,8 +117,8 @@ int main(){
     print(heap,size);
     deleteFromHeap(heap, 55, &size);
     print(heap,size);
-    printf("%d", heap[1]);// maxvalue
-    printf("\n%d\n", search(heap, 55, &size));
+    printf("%d", maxValue(heap, &size));// maxvalue
     printf("\n%d\n", search(heap, 54, &size));
+    printf("\n%d\n", search(heap, 14, &size));
     return 0;
 }

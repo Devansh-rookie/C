@@ -161,8 +161,8 @@ int sumBT(node * root){
 node * recursiveSearch(node * root, int val){
     if(root == NULL) return NULL;
     if(root->val == val) return root;
-    else if(root->val>val) recursiveSearch(root->left,val);
-    else if(root->val<val) recursiveSearch(root->right,val);
+    else if(root->val>val) return recursiveSearch(root->left,val);
+    else if(root->val<val) return recursiveSearch(root->right,val);
     return NULL;
 }
 
